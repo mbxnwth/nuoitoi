@@ -6,21 +6,15 @@
     <title>Dự án Nuôi Tôi</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
-    <script src="https://www.youtube.com/iframe_api"></script>
 </head>
 <body>
 
-    <div class="video-background">
-        <iframe id="player" 
-            src="https://www.youtube.com/embed/F074LkX6zr4?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=1&playlist=F074LkX6zr4&enablejsapi=1&origin=https://mbxnwith.github.io" 
-            frameborder="0" 
-            allow="autoplay; encrypted-media" 
-            allowfullscreen>
-        </iframe>
-    </div>
+    <video autoplay muted loop playsinline id="myVideo">
+        <source src="https://res.cloudinary.com/dkh3aw0zk/video/upload/v1765352018/Untitled_video_-_Made_with_Clipchamp_2_krz0iz.mp4" type="video/mp4">
+        Trình duyệt không hỗ trợ thẻ video.
+    </video>
     
-    <button id="muteBtn" onclick="toggleYoutubeMute()">
+    <button id="muteBtn" onclick="toggleMute()">
         <i class="fas fa-volume-mute" id="muteIcon"></i>
         <span>Bật nhạc nền</span>
     </button>
@@ -71,43 +65,24 @@
     </div>
 
     <script>
-    var player;
-    function onYouTubeIframeAPIReady() {
-        console.log("API Youtube đã sẵn sàng");
-        player = new YT.Player('player', {
-            events: {
-                'onReady': onPlayerReady
-            }
-        });
-    }
+        function toggleMute() {
+            var video = document.getElementById("myVideo");
+            var btn = document.getElementById("muteBtn");
+            var icon = document.getElementById("muteIcon");
+            var text = btn.querySelector("span");
 
-    function onPlayerReady(event) {
-        event.target.mute(); 
-        event.target.playVideo();
-    }
-
-    function toggleYoutubeMute() {
-        var btn = document.getElementById("muteBtn");
-        var icon = document.getElementById("muteIcon");
-        var text = btn.querySelector("span");
-
-        if (player && typeof player.unMute === 'function') {
-            if (player.isMuted()) {
-                player.unMute(); 
-                player.setVolume(100); 
+            if (video.muted) {
+                video.muted = false; 
                 icon.className = "fas fa-volume-up";
                 text.innerText = "Tắt nhạc nền";
                 btn.classList.add("active");
             } else {
-                player.mute(); 
+                video.muted = true; 
                 icon.className = "fas fa-volume-mute";
                 text.innerText = "Bật nhạc nền";
                 btn.classList.remove("active");
             }
-        } else {
-            alert("Video chưa tải xong, bạn đợi 1-2 giây rồi bấm lại nhé!");
         }
-    }
-</script>
+    </script>
 </body>
 </html>
