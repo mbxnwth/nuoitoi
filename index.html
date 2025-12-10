@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dự án Nuôi Tôi</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <script src="https://www.youtube.com/iframe_api"></script>
+</head>
+<body>
+
+    <div class="video-background">
+        <iframe id="player" 
+            src="https://www.youtube.com/embed/F074LkX6zr4?controls=0&showinfo=0&rel=0&autoplay=1&loop=1&mute=1&playlist=F074LkX6zr4&enablejsapi=1&origin=https://youtube.com" 
+            frameborder="0" 
+            allow="autoplay; encrypted-media" 
+            allowfullscreen>
+        </iframe>
+    </div>
+    
+    <button id="muteBtn" onclick="toggleYoutubeMute()">
+        <i class="fas fa-volume-mute" id="muteIcon"></i>
+        <span>Bật nhạc nền</span>
+    </button>
+    
+    <div class="video-overlay"></div>
+
+    <div class="container">
+        <header class="profile-section">
+            <div class="avatar">
+                <img src="https://via.placeholder.com/150" alt="Nuôi Tôi">
+            </div>
+            <h1>Dự án Nuôi Tôi</h1>
+            
+            <div class="pitch-deck">
+                <p class="greeting"><strong>Kính gửi quý mạnh thường quân,</strong></p>
+                <p class="intro">Nhằm mục tiêu phủ sóng không khí giáng sinh và cải thiện đời sống cá nhân cho các hoàn cảnh khó khăn, em xin được kêu gọi từ thiện cho dự án mang tên <strong>Nuôi Tôi</strong>.</p>
+                
+                <ul class="policy-list">
+                    <li><i class="fas fa-mobile-alt"></i> <strong>Cổng thanh toán:</strong> Momo 0326902699</li>
+                    <li><i class="fas fa-eye-slash"></i> <strong>Chính sách minh bạch:</strong> Cam kết <span class="highlight-red">KHÔNG minh bạch</span>, không giải trình, không sao kê.</li>
+                    <li><i class="fas fa-gem"></i> <strong>Hạn mức đầu tư:</strong> Khuyến khích gói <strong>Premium (từ 50k)</strong>. Các gói Basic (dưới 50k) xin phép từ chối vì không đủ chi phí vận hành tấm lòng bác ái.</li>
+                </ul>
+
+                <p class="closing">Rất mong nhận được sự ủng hộ và quan tâm của các mạnh thường quân!</p>
+            </div>
+        </header>
+
+        <section class="qr-section">
+            <h3 class="highlight-qr">Quét mã để đóng góp</h3>
+            
+            <div class="qr-card">
+                <div class="qr-container">
+                    <img src="momo.jpg" alt="QR Code">
+                </div>
+                
+                <div class="transfer-details">
+                    <p class="transfer-note">Nội dung chuyển khoản:</p>
+                    <div class="copy-box">
+                        <strong>UNGHO_NUOITOI</strong>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>&copy; 2025 Nuoi Toi. No rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        var player;
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('player', {
+                events: {
+                    'onReady': onPlayerReady
+                }
+            });
+        }
+
+        function onPlayerReady(event) {
+            event.target.mute(); 
+            event.target.playVideo();
+        }
+
+        function toggleYoutubeMute() {
+            var btn = document.getElementById("muteBtn");
+            var icon = document.getElementById("muteIcon");
+            var text = btn.querySelector("span");
+
+            if (player.isMuted()) {
+                player.unMute(); 
+                icon.className = "fas fa-volume-up";
+                text.innerText = "Tắt nhạc nền";
+                btn.classList.add("active");
+            } else {
+                player.mute(); 
+                icon.className = "fas fa-volume-mute";
+                text.innerText = "Bật nhạc nền";
+                btn.classList.remove("active");
+            }
+        }
+    </script>
+</body>
+</html>
